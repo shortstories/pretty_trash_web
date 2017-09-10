@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="30 seconds">
+    <springProperty scope="context" name="path" source="log.path"
+                    defaultValue="./logs"/>
+    <springProperty scope="context" name="console.level" source="log.console.level"
+                    defaultValue="DEBUG"/>
+    <springProperty scope="context" name="level" source="log.level"
+                    defaultValue="DEBUG"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>${console.level}</level>
+        </filter>
+        <encoder>
+            <pattern>[%date] [%level] [%thread] [%logger{0}] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${path}/pretty-trash.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${path}/pretty-trash.log.%d{yyyyMMdd}.%i</fileNamePattern>
+            <maxFileSize>256MB</maxFileSize>
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>[%date] [%level] [%thread] [%logger{0}] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.trash.pretty" level="${level}" >
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE" />
+    </logger>
+
+    <logger name="org.springframework" level="ERROR" >
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </logger>
+
+    <root level="ERROR">
+    </root>
+</configuration>

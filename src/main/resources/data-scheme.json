@@ -1,0 +1,15 @@
+// subscribe
+{
+  "sid": "string",
+  "nickname": "string"
+}
+
+// data
+{
+  "nickname": "string",
+  "index": 0,
+  "timestamp": 0,
+  "startFrom" 0,
+  "contents": "string",
+  "blockLength": 0
+}

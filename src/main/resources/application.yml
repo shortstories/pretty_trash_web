@@ -1,0 +1,16 @@
+log:
+  level: DEBUG
+  console:
+    level: DEBUG
+  path: ../logs/pretty-trash
+
+server:
+  port: 8080
+
+handlebars:
+  enabled: true
+  prefix: classpath:templates/
+  suffix: .hbs
+
+websocket:
+  url: http://220.230.114.15:3000
